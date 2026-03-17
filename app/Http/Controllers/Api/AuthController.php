@@ -7,11 +7,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
-use Ramsey\Uuid\Guid\Fields;
 
 class AuthController extends Controller
 {
-    use HasApiTokens;
+
     
     public function register(Request $request)
     {
@@ -24,7 +23,9 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
-            'password' => Hash::make($fields['password'])
+            'password' => Hash::make($fields['password']),
+            'role' => 'client',
+            'dietary_tags' => []
         ]);
 
         $token = $user->createToken($user->name)->plainTextToken;

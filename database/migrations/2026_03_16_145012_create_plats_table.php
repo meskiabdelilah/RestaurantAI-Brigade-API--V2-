@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('plats', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+
+            $table->string('name');
+            $table->decimal('price', 8, 2);
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
+
+            $table->boolean('is_available')->default(true);
+
             $table->timestamps();
         });
     }

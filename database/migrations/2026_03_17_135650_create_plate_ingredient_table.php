@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recommendations', function (Blueprint $table) {
+        Schema::create('plate_ingredient', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('plate_id')->constrained()->cascadeOnDelete();
-            $table->integer('score');
-            $table->string('warning_message')->nullable();
-            $table->enum('status', ['processing', 'ready'])->default('processing');
+            $table->foreignId('ingredient_id')->constrained()->cascadeOnDelete();   
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recommendations');
+        Schema::dropIfExists('plate_ingredient');
     }
 };

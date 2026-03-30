@@ -24,6 +24,10 @@ class User extends Authenticatable
         'role',
         'dietary_tags'
     ];
+    protected $casts = [
+        'dietary_tags' => 'array',
+        'password' => 'hashed',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.

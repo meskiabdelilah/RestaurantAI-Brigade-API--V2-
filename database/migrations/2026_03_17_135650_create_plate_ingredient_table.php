@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('plate_ingredient', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plate_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('ingredient_id')->constrained()->cascadeOnDelete();   
+
+            $table->foreignId('plate_id')->constrained('plats')->cascadeOnDelete();
+            $table->foreignId('ingredient_id')->constrained()->cascadeOnDelete();
+            
+            $table->unique(['plate_id', 'ingredient_id']);
             $table->timestamps();
         });
     }

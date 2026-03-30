@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'client'])->default('client');
-            $table->json('dietary_tags');
+            $table->json('dietary_tags')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

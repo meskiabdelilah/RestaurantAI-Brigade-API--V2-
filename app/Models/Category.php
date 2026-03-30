@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Category extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
+        'description',
+        'color',
+        'is_active'
     ];
 
     public function user()

@@ -9,18 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('recommendations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('plate_id')->constrained()->cascadeOnDelete();
-            $table->integer('score');
-            $table->string('warning_message')->nullable();
-            $table->enum('status', ['processing', 'ready'])->default('processing');
-            $table->timestamps();
-        });
-    }
+public function up(): void
+{
+    Schema::create('recommendations', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+        
+        $table->foreignId('plate_id')->constrained('plats')->cascadeOnDelete(); 
+        
+        $table->integer('score');
+        $table->string('warning_message')->nullable();
+        $table->enum('status', ['processing', 'ready', 'failed'])->default('processing');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

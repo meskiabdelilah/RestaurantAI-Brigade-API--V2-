@@ -7,16 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Plat extends Model
 {
     protected $fillable = [
+        'user_id',
+        'category_id',
         'name',
         'price',
-        'photo'
+        'description',
+        'image',
+        'is_available'
     ];
 
-    protected $appends = ['photo_url'];
+    protected $appends = ['image_url'];
 
-    public function getPhotoUrlAttribute()
+    public function getImageUrlAttribute()
     {
-        return $this->photo ? asset('storage/' . $this->photo) : null;
+        return $this->image ? asset('storage/' . $this->image) : null;
     }
 
     public function user()
@@ -31,6 +35,9 @@ class Plat extends Model
 
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class, 
+        'plate_ingredient', 
+        'plate_id', 
+        'ingredient_id');
     }
 }

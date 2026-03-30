@@ -12,8 +12,13 @@ class Ingredient extends Model
         'tags' => 'array'
     ];
 
-    public function plates()
+    public function plats()
     {
-        return $this->belongsToMany(Plat::class);
+        return $this->belongsToMany(
+            Plat::class,
+            'plate_ingredient',
+            'ingredient_id',
+            'plate_id'
+        );
     }
 }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
+use Ramsey\Uuid\Guid\Fields;
 
 class AuthController extends Controller
 {
@@ -67,6 +68,31 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Logged out successfully'
         ], 200);
+    }
+
+    public function profile(Request $request)
+    {
+        return response()->json($request->user());
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $fields = $request->validate([
+            'dietary_tags' => 'nullable|array',
+            'dietary_tags.*' => 'string'
+        ]);
+
+        $user = $request->user();
+
+        $user->update([
+            'dietary_tags' => $fields['dietary_tags'] ?? []
+        ]);
+
+
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'data' => $user
+        ]);
     }
 
 }

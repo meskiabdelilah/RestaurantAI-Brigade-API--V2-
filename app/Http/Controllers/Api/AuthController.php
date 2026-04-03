@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
-use Ramsey\Uuid\Guid\Fields;
 
 class AuthController extends Controller
 {
